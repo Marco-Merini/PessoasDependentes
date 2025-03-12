@@ -58,6 +58,9 @@ namespace ApiProdutosPessoas.Repositories
                 pessoa.CEP = CodeGenerator.GenerateRandomCEP();
             }
 
+            await _dbContext.Pessoas.AddAsync(pessoa);
+            await _dbContext.SaveChangesAsync();
+
             return pessoa;
         }
 

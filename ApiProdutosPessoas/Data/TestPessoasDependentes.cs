@@ -1,4 +1,6 @@
-﻿using ApiProdutosPessoas.Data.Map;
+﻿using ApiPessoasDependentesTest.Data.Map;
+using ApiPessoasDependentesTest.Models;
+using ApiProdutosPessoas.Data.Map;
 using ApiProdutosPessoas.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,10 +18,12 @@ namespace ApiProdutosPessoas.Data
         }
 
         public DbSet<PessoaModel> Pessoas { get; set; }
+        public DbSet<DependenteModel> Dependentes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new PessoaMap());
+            modelBuilder.ApplyConfiguration(new DependenteMap());
             base.OnModelCreating(modelBuilder);
         }
     }

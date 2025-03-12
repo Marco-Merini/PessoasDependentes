@@ -70,4 +70,25 @@ public static class CodeGenerator
 
         return cpf;
     }
+
+
+    public static int GenerateRandomDependenteCode()
+    {
+        return _random.Next(100000, 1000000);
+    }
+
+    // Verifica se o código de dependente já existe no banco de dados
+    public static async Task<int> GenerateUniqueDependenteCode(TestPessoasDependentes dbContext)
+    {
+        int code;
+        bool exists;
+
+        do
+        {
+            code = GenerateRandomDependenteCode();
+            exists = await dbContext.Dependentes.AnyAsync(d => d.IDdependente == code);
+        } while (exists);
+
+        return code;
+    }
 }
